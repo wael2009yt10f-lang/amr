@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="محلات مصر - اكتشف المحلات والمطاعم والخدمات القريبة منك"
+    >
+    
+
+    <meta
+        name="theme-color"
+        content="#2563eb"
+    >
+   
+    <title>محلات مصر | اكتشف كل ما حولك</title>
+
+
+    <!-- =========================
+         LEAFLET CSS
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <!-- =========================
+         FONT AWESOME
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =========================
+         WEBSITE CSS
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="2.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container header-content">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="#"
+            class="logo"
+        >
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
+            <div class="logo-text">
+
+                محلات
+
+                <strong>
+                    مصر
+                </strong>
+
+            </div>
+
+        </a>
+
+
+        <!-- DESKTOP NAV -->
+
+        <nav class="desktop-nav">
+
+            <a href="#explore">
+                اكتشف
+            </a>
+
+            <a href="#categories">
+                التصنيفات
+            </a>
+
+            <a href="#add-shop">
+                أضف محلك
+            </a>
+
+            <a href="#contact">
+                تواصل معنا
+            </a>
+
+        </nav>
+
+
+        <!-- MOBILE BUTTON -->
+
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="فتح القائمة"
+        >
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MOBILE MENU
+===================================================== -->
+
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+>
+
+    <button
+        class="close-menu"
+        id="closeMenu"
+        aria-label="إغلاق القائمة"
+    >
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <a href="#explore">
+        اكتشف
+    </a>
+
+    <a href="#categories">
+        التصنيفات
+    </a>
+
+    <a href="#add-shop">
+        أضف محلك
+    </a>
+
+    <a href="#contact">
+        تواصل معنا
+    </a>
+
+</div>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+
+<section class="hero">
+
+    <div class="container hero-content">
+
+
+        <div class="hero-badge">
+
+            <i class="fa-solid fa-location-crosshairs"></i>
+
+            اكتشف الأماكن من حولك
+
+        </div>
+
+
+        <h1>
+
+            كل المحلات والخدمات
+
+            <span>
+                قدام عينك
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            اكتشف المطاعم والمحلات والسوبر ماركت
+            والحلويات والكافيهات والخدمات القريبة منك
+            على خريطة واحدة.
+
+        </p>
+
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+
+            <div class="search-input-wrapper">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="بتدور على إيه؟ مثال: مطعم، حلويات، سوبر ماركت..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <button
+                class="location-btn"
+                id="locationBtn"
+            >
+
+                <i class="fa-solid fa-location-crosshairs"></i>
+
+                موقعي الحالي
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- AREA SEARCH -->
+
+        <div class="area-search">
+
+            <div class="area-input-wrapper">
+
+                <i class="fa-solid fa-map-location-dot"></i>
+
+                <input
+                    type="text"
+                    id="areaInput"
+                    placeholder="أو اكتب منطقة مختلفة مثل: الزقازيق"
+                >
+
+            </div>
+
+
+            <button
+                id="areaSearchBtn"
+                class="area-search-btn"
+            >
+
+                بحث
+
+            </button>
+
+        </div>
+
+
+
+        <!-- QUICK CATEGORIES -->
+
+        <div class="quick-categories">
+
+
+            <button
+                class="quick-category active"
+                data-category="all"
+            >
+                الكل
+            </button>
+
+
+            <button
+                class="quick-category"
+                data-category="restaurant"
+            >
+
+                <i class="fa-solid fa-utensils"></i>
+
+                مطاعم
+
+            </button>
+
+
+            <button
+                class="quick-category"
+                data-category="sweets"
+            >
+
+                <i class="fa-solid fa-cake-candles"></i>
+
+                حلويات
+
+            </button>
+
+
+            <button
+                class="quick-category"
+                data-category="market"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                سوبر ماركت
+
+            </button>
+
+
+            <button
+                class="quick-category"
+                data-category="shopping"
+            >
+
+                <i class="fa-solid fa-shirt"></i>
+
+                ملابس
+
+            </button>
+
+
+            <button
+                class="quick-category"
+                data-category="cafe"
+            >
+
+                <i class="fa-solid fa-mug-hot"></i>
+
+                كافيهات
+
+            </button>
+
+
+            <button
+                class="quick-category"
+                data-category="pharmacy"
+            >
+
+                <i class="fa-solid fa-prescription-bottle-medical"></i>
+
+                صيدليات
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EXPLORE
+===================================================== -->
+
+<section
+    class="explore-section"
+    id="explore"
+>
+
+<div class="container">
+
+
+    <!-- SECTION TITLE -->
+
+    <div class="section-heading">
+
+
+        <div>
+
+            <span>
+                استكشف منطقتك
+            </span>
+
+            <h2>
+                الأماكن القريبة منك
+            </h2>
+
+        </div>
+
+
+        <div class="results-count">
+
+            <strong id="resultsCount">
+                0
+            </strong>
+
+            مكان
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         MAP
+    ================================================== -->
+
+    <div class="map-wrapper">
+
+
+        <div id="map"></div>
+
+
+        <!-- MAP LOADING -->
+
+        <div
+            class="map-loading"
+            id="mapLoading"
+        >
+
+            <div class="loading-spinner"></div>
+
+            <span>
+                جاري تحميل الأماكن...
+            </span>
+
+        </div>
+
+
+        <!-- LOCATION CARD -->
+
+        <div class="map-location-card">
+
+
+            <div class="map-location-icon">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    الموقع الحالي
+                </strong>
+
+                <span id="currentLocationText">
+                    حدد موقعك للعثور على المحلات القريبة
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SHOPS
+    ================================================== -->
+
+    <div class="shops-section">
+
+
+        <div class="shops-header">
+
+
+            <h3>
+
+                <i class="fa-solid fa-store"></i>
+
+                المحلات والأماكن
+
+            </h3>
+
+
+            <button
+                id="showAllBtn"
+            >
+
+                عرض الكل
+
+            </button>
+
+
+        </div>
+
+
+        <div
+            class="shops-grid"
+            id="shopsGrid"
+        >
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section
+    class="categories-section"
+    id="categories"
+>
+
+<div class="container">
+
+
+    <div class="section-heading centered">
+
+        <span>
+            اختار اللي بتدور عليه
+        </span>
+
+        <h2>
+            تصفح حسب التصنيف
+        </h2>
+
+        <p>
+            اختار نوع المكان الذي تبحث عنه.
+        </p>
+
+    </div>
+
+
+
+    <div class="categories-grid">
+
+
+        <button
+            class="category-card"
+            data-category="restaurant"
+        >
+
+            <div class="category-icon">
+
+                <i class="fa-solid fa-utensils"></i>
+
+            </div>
+
+            <h3>
+                مطاعم
+            </h3>
+
+            <span>
+                اكتشف المطاعم القريبة
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="category-card"
+            data-category="sweets"
+        >
+
+            <div class="category-icon">
+
+                <i class="fa-solid fa-cake-candles"></i>
+
+            </div>
+
+            <h3>
+                حلويات
+            </h3>
+
+            <span>
+                حلويات ومخابز
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="category-card"
+            data-category="market"
+        >
+
+            <div class="category-icon">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+            </div>
+
+            <h3>
+                سوبر ماركت
+            </h3>
+
+            <span>
+                احتياجاتك اليومية
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="category-card"
+            data-category="shopping"
+        >
+
+            <div class="category-icon">
+
+                <i class="fa-solid fa-shirt"></i>
+
+            </div>
+
+            <h3>
+                ملابس
+            </h3>
+
+            <span>
+                ملابس وأزياء
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="category-card"
+            data-category="cafe"
+        >
+
+            <div class="category-icon">
+
+                <i class="fa-solid fa-mug-hot"></i>
+
+            </div>
+
+            <h3>
+                كافيهات
+            </h3>
+
+            <span>
+                كافيهات ومشروبات
+            </span>
+
+        </button>
+
+
+
+        <button
+            class="category-card"
+            data-category="pharmacy"
+        >
+
+            <div class="category-icon">
+
+                <i class="fa-solid fa-prescription-bottle-medical"></i>
+
+            </div>
+
+            <h3>
+                صيدليات
+            </h3>
+
+            <span>
+                صيدليات قريبة منك
+            </span>
+
+        </button>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADD SHOP
+===================================================== -->
+
+<section
+    class="add-shop-section"
+    id="add-shop"
+>
+
+<div class="container">
+
+
+    <div class="add-shop-box">
+
+
+        <div class="add-shop-content">
+
+
+            <span class="small-label">
+
+                هل تمتلك محلًا؟
+
+            </span>
+
+
+            <h2>
+
+                خلي محلك يظهر قدام عملاء جدد
+
+            </h2>
+
+
+            <p>
+
+                أضف بيانات محلك وموقعه وصوره ليظهر
+                للأشخاص الذين يبحثون عن خدمات قريبة منهم.
+
+            </p>
+
+
+            <button
+                class="primary-btn"
+                id="addShopBtn"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                أضف محلك الآن
+
+            </button>
+
+
+        </div>
+
+
+        <div class="add-shop-icon">
+
+            <i class="fa-solid fa-store"></i>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+    class="contact-section"
+    id="contact"
+>
+
+<div class="container">
+
+
+    <div class="contact-content">
+
+
+        <div>
+
+            <span class="small-label">
+
+                تواصل معنا
+
+            </span>
+
+
+            <h2>
+
+                عندك سؤال أو اقتراح؟
+
+            </h2>
+
+
+            <p>
+
+                لو عندك استفسار أو اقتراح أو مهتم
+                بإضافة محلك، تواصل معنا.
+
+            </p>
+
+        </div>
+
+
+        <div class="contact-actions">
+
+
+            <a
+                href="tel:+201050989683"
+                class="contact-btn"
+            >
+
+                <i class="fa-solid fa-phone"></i>
+
+                اتصل بنا
+
+            </a>
+
+
+            <a
+                href="https://wa.me/201050989683"
+                class="contact-btn whatsapp"
+                target="_blank"
+                rel="noopener"
+            >
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+                WhatsApp
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="container footer-content">
+
+
+    <div class="footer-logo">
+
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+        </div>
+
+        <span>
+
+            محلات مصر
+
+        </span>
+
+    </div>
+
+
+    <p>
+
+        اكتشف كل ما حولك بسهولة.
+
+    </p>
+
+
+    <span class="copyright">
+
+        © 2026 محلات مصر
+
+    </span>
+
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     LEAFLET JS
+===================================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- =====================================================
+     WEBSITE JS
+===================================================== -->
+
+<script
+    src="script.js"
+></script>
+
+
+</body>
+
+</html>
